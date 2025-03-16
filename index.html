@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <nav>
+        <div class="logo">MovieManager</div>
+        <ul class="nav-links">
+            <li><a href="#" data-page="home" class="active">Accueil</a></li>
+            <li><a href="#" data-page="movies">Films</a></li>
+            <li class="auth-required"><a href="#" data-page="add-movie">Ajouter</a></li>
+            <li class="guest-only"><a href="#" data-page="login">Connexion</a></li>
+            <li class="guest-only"><a href="#" data-page="register">Inscription</a></li>
+            <li class="auth-required"><a href="#" id="logout">Deconnexion</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main id="app">
+    <!-- Pages will be dynamically loaded here -->
+</main>
+
+<footer>
+    <p>&copy; 2025 MovieManager. All rights reserved.</p>
+</footer>
+
+<!-- Page Templates -->
+<template id="home-template">
+    <div class="home-page">
+        <h1>Welcome to MovieManager</h1>
+        <p>Discover and manage your favorite movies</p>
+    </div>
+</template>
+
+<template id="movies-template">
+    <div class="movies-page">
+        <h1>Movies</h1>
+        <div class="movies-grid"></div>
+    </div>
+</template>
+
+<template id="movie-details-template">
+    <div class="movie-details">
+        <div class="movie-header">
+            <h1></h1>
+            <div class="movie-actions auth-required"></div>
+        </div>
+        <div class="movie-content">
+            <img class="movie-image" src="" alt="">
+            <div class="movie-info">
+                <p class="release-date"></p>
+                <p class="description"></p>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="login-template">
+    <div class="auth-form">
+        <h1>Login</h1>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</template>
+
+<template id="register-template">
+    <div class="auth-form">
+        <h1>Register</h1>
+        <form id="register-form">
+            <div class="form-group">
+                <label for="nickname">Nickname</label>
+                <input type="text" id="nickname" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</template>
+
+<template id="add-movie-template">
+    <div class="movie-form">
+        <h1>Add Movie</h1>
+        <form id="movie-form">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="releaseDate">Release Date</label>
+                <input type="date" id="releaseDate" required>
+            </div>
+            <div class="form-group">
+                <label for="imageUrl">Image URL</label>
+                <input type="url" id="imageUrl" required>
+            </div>
+            <button type="submit">Add Movie</button>
+        </form>
+    </div>
+</template>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -9,28 +9,48 @@ class App {
         this.movieService = new MovieService();
         this.router = new Router();
 
-        // Make app instance globally available for event handlers
+        // Rendre l'instance de l'app disponible globalement pour les gestionnaires d'événements
         window.app = this;
 
-        this.setupEventListeners();
-        this.updateNavigation();
+        // Attendre que le DOM soit chargé avant d'initialiser l'application
+        document.addEventListener('DOMContentLoaded', () => {
+            this.initializeActiveLink();
+            this.setupEventListeners();
+            this.updateNavigation();
+            this.router.init();
+        });
+    }
 
-        // Initialize router
-        this.router.init();
+    initializeActiveLink() {
+        const activePage = localStorage.getItem('activePage') || 'home';
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
+            if (link.dataset.page === activePage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
     }
 
     setupEventListeners() {
         // Navigation
-        document.querySelectorAll('.nav-links a').forEach(link => {
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
+                // Retirer la classe active de tous les liens
+                navLinks.forEach(l => l.classList.remove('active'));
+                // Ajouter la classe active sur le lien cliqué
+                e.target.classList.add('active');
+                // Sauvegarder la page active dans le localStorage
                 const page = e.target.dataset.page;
+                localStorage.setItem('activePage', page);
                 if (page) {
                     this.router.navigate(page);
                 }
             });
         });
-
         // Logout
         document.getElementById('logout').addEventListener('click', (e) => {
             e.preventDefault();

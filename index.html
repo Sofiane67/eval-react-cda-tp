@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Manager</title>
+    <title>Moviz</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
     <nav>
-        <div class="logo">MovieManager</div>
+        <div class="logo">
+            <img src="logo.png" class="logo">
+        </div>
         <ul class="nav-links">
             <li><a href="#" data-page="home" class="active">Accueil</a></li>
             <li><a href="#" data-page="movies">Films</a></li>
             <li class="auth-required"><a href="#" data-page="add-movie">Ajouter</a></li>
             <li class="guest-only"><a href="#" data-page="login">Connexion</a></li>
             <li class="guest-only"><a href="#" data-page="register">Inscription</a></li>
-            <li class="auth-required"><a href="#" id="logout">Deconnexion</a></li>
+            <li class="auth-required"><a href="#" id="logout">Déconnexion</a></li>
         </ul>
     </nav>
 </header>
@@ -26,20 +28,28 @@
 </main>
 
 <footer>
-    <p>&copy; 2025 MovieManager. All rights reserved.</p>
+    <p>&copy; 2025 Moviz. Tous droits réservés</p>
 </footer>
 
 <!-- Page Templates -->
 <template id="home-template">
     <div class="home-page">
-        <h1>Welcome to MovieManager</h1>
-        <p>Discover and manage your favorite movies</p>
+        <h1>🎬 Bienvenue sur Moviz ! 🍿</h1>
+        <p>Avec Moviz, crée ta propre liste de films, note ceux que tu as vus et découvre de nouveaux films à regarder. Plus besoin de te souvenir de tous les titres, tout est stocké en un seul endroit.</p>
+        <ul>
+            <h2>Fonctionnalités principales :</h2>
+            <li>Ajoute et organise tes films</li>
+            <li>Note et laisse des avis</li>
+            <li>Découvre de nouveaux films à voir</li>
+        </ul>
+        <p>Simple, rapide et efficace. Moviz t’aide à ne jamais manquer un bon film !</p>
     </div>
 </template>
 
+
 <template id="movies-template">
     <div class="movies-page">
-        <h1>Movies</h1>
+        <h1>Films</h1>
         <div class="movies-grid"></div>
     </div>
 </template>
@@ -62,27 +72,27 @@
 
 <template id="login-template">
     <div class="auth-form">
-        <h1>Login</h1>
+        <h1>Connexion</h1>
         <form id="login-form">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" required>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Mot de passe</label>
                 <input type="password" id="password" required>
             </div>
-            <button type="submit">Login</button>
+            <button type="submit">Se connecter</button>
         </form>
     </div>
 </template>
 
 <template id="register-template">
     <div class="auth-form">
-        <h1>Register</h1>
+        <h1>Inscription</h1>
         <form id="register-form">
             <div class="form-group">
-                <label for="nickname">Nickname</label>
+                <label for="nickname">Pseudo</label>
                 <input type="text" id="nickname" required>
             </div>
             <div class="form-group">
@@ -90,35 +100,35 @@
                 <input type="email" id="email" required>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Mot de passe</label>
                 <input type="password" id="password" required>
             </div>
-            <button type="submit">Register</button>
+            <button type="submit">S'inscrire</button>
         </form>
     </div>
 </template>
 
 <template id="add-movie-template">
     <div class="movie-form">
-        <h1>Add Movie</h1>
+        <h1>Ajouter un film</h1>
         <form id="movie-form">
             <div class="form-group">
-                <label for="title">Title</label>
+                <label for="title">Titre</label>
                 <input type="text" id="title" required>
             </div>
             <div class="form-group">
-                <label for="description">Description</label>
+                <label for="description">Déscription</label>
                 <textarea id="description" required></textarea>
             </div>
             <div class="form-group">
-                <label for="releaseDate">Release Date</label>
+                <label for="releaseDate">Date de sortie</label>
                 <input type="date" id="releaseDate" required>
             </div>
             <div class="form-group">
-                <label for="imageUrl">Image URL</label>
+                <label for="imageUrl">URL de l'image</label>
                 <input type="url" id="imageUrl" required>
             </div>
-            <button type="submit">Add Movie</button>
+            <button type="submit">Ajouter</button>
         </form>
     </div>
 </template>

@@ -115,7 +115,7 @@ export class Router {
         const grid = document.querySelector('.movies-grid');
 
         if (movies.length === 0) {
-            grid.innerHTML = '<p>No movies found.</p>';
+            grid.innerHTML = '<p>Aucun film trouvé</p>';
             return;
         }
 

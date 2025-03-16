@@ -1,13 +1,22 @@
 export class AuthService {
-    constructor() {
-        this.users = JSON.parse(localStorage.getItem('users')) || [];
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    // On n'initialise plus d'état dans le constructeur
+    constructor() {}
+
+    // Méthode privée pour récupérer les utilisateurs depuis le localStorage
+    _getUsers() {
+        return JSON.parse(localStorage.getItem('users')) || [];
+    }
+
+    // Méthode privée pour sauvegarder les utilisateurs dans le localStorage
+    _saveUsers(users) {
+        localStorage.setItem('users', JSON.stringify(users));
     }
 
     register(nickname, email, password) {
         return new Promise((resolve, reject) => {
             try {
-                if (this.users.some(user => user.email === email)) {
+                const users = this._getUsers();
+                if (users.some(user => user.email === email)) {
                     throw new Error('Email already exists');
                 }
 
@@ -19,9 +28,8 @@ export class AuthService {
                     isLogged: true
                 };
 
-                this.users.push(user);
-                localStorage.setItem('users', JSON.stringify(this.users));
-                this.currentUser = user;
+                users.push(user);
+                this._saveUsers(users);
                 localStorage.setItem('currentUser', JSON.stringify(user));
 
                 resolve(user);
@@ -34,16 +42,16 @@ export class AuthService {
     login(email, password) {
         return new Promise((resolve, reject) => {
             try {
-                const user = this.users.find(u => u.email === email && u.password === password);
+                const users = this._getUsers();
+                const user = users.find(u => u.email === email && u.password === password);
 
                 if (!user) {
                     throw new Error('Invalid credentials');
                 }
 
                 user.isLogged = true;
-                this.currentUser = user;
                 localStorage.setItem('currentUser', JSON.stringify(user));
-                localStorage.setItem('users', JSON.stringify(this.users));
+                this._saveUsers(users);
 
                 resolve(user);
             } catch (error) {
@@ -53,19 +61,21 @@ export class AuthService {
     }
 
     logout() {
-        if (this.currentUser) {
-            const user = this.users.find(u => u.id === this.currentUser.id);
-            if (user) {
-                user.isLogged = false;
-                localStorage.setItem('users', JSON.stringify(this.users));
+        const users = this._getUsers();
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+        if (currentUser) {
+            const index = users.findIndex(u => u.id === currentUser.id);
+            if (index !== -1) {
+                users[index].isLogged = false;
             }
-            this.currentUser = null;
-            localStorage.removeItem('currentUser');
+            this._saveUsers(users);
         }
+        localStorage.removeItem('currentUser');
     }
 
     isAuthenticated() {
-        return !!this.currentUser;
+        return !!localStorage.getItem('currentUser');
     }
 
     static getCurrentUser() {
